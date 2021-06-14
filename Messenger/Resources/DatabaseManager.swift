@@ -14,14 +14,32 @@ final class DatabaseManager {
     
     private let database = Database.database().reference()
     
+    
+}
+
+//MARK: - Account management
+
+extension DatabaseManager {
+    
+    //return true if user is new, return false if user exists
+    public func validateNewUser(by email: String, completion: @escaping ((Bool) -> Void)) {
+        database.child(email).observeSingleEvent(of: .value) { dataSnapshot in
+            guard dataSnapshot.value as? String != nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+        
+    }
+    
+    
     public func addUser(with user: MessengerUser) {
         database.child(user.email).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
         ])
     }
-    
-    
 }
 
 struct MessengerUser {
