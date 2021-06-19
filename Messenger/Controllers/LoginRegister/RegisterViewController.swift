@@ -182,7 +182,7 @@ class RegisterViewController: UIViewController {
         //Firebase Register
         
         DatabaseManager.shared.validateNewUser(by: email) { [weak self] newUser in
-            guard newUser else {
+            guard !newUser else {
                 //it's not a new user
                 self?.alertLoginError(message: "The account with this email already exists.")
                 return

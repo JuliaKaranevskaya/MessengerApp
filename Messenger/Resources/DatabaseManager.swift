@@ -23,7 +23,11 @@ extension DatabaseManager {
     
     //return true if user is new, return false if user exists
     public func validateNewUser(by email: String, completion: @escaping ((Bool) -> Void)) {
-        database.child(email).observeSingleEvent(of: .value) { dataSnapshot in
+        
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        
+        database.child(safeEmail).observeSingleEvent(of: .value) { dataSnapshot in
             guard dataSnapshot.value as? String != nil else {
                 completion(false)
                 return
@@ -35,7 +39,7 @@ extension DatabaseManager {
     
     
     public func addUser(with user: MessengerUser) {
-        database.child(user.email).setValue([
+        database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
         ])
@@ -47,4 +51,10 @@ struct MessengerUser {
     let lastName: String
     let email: String
 //    let profilePictureUrl: String
+    
+    var safeEmail: String {
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -66,6 +67,8 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
         return button
     }()
+    
+    private let facebookLoginButton = FBLoginButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +87,11 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
+        scrollView.addSubview(facebookLoginButton)
+        
+    
+        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,6 +103,7 @@ class LoginViewController: UIViewController {
         setEmailField()
         setPasswordField()
         setLoginButton()
+        setFacebookLoginButton()
     }
     
     @objc private func didTapRegister() {
@@ -179,6 +188,16 @@ class LoginViewController: UIViewController {
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 50).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -50).isActive = true
+    }
+    
+    private func setFacebookLoginButton() {
+        facebookLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookLoginButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10).isActive = true
+        facebookLoginButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        facebookLoginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        facebookLoginButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 50).isActive = true
+        facebookLoginButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -50).isActive = true
+        
     }
 
 }
