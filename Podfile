@@ -11,5 +11,10 @@ pod 'FBSDKLoginKit'
 
 pod 'FBSDKLoginKit'
 
+pod 'MessageKit'
+pod 'JGProgressHUD'
+pod 'RealmSwift'
+pod 'SDWebImage'
+
 
 end

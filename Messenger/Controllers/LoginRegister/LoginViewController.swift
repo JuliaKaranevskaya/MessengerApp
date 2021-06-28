@@ -8,9 +8,11 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     
+    private let loadingSpinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -85,7 +87,6 @@ class LoginViewController: UIViewController {
         
         emailField.delegate = self
         passwordField.delegate = self
-        
         facebookLoginButton.delegate = self
         
         //Add subviews
@@ -136,10 +137,18 @@ class LoginViewController: UIViewController {
         }
         
         //Firebase Log in
+        
+        loadingSpinner.show(in: view)
+        
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else {
                 return
             }
+            
+            DispatchQueue.main.async {
+                strongSelf.loadingSpinner.dismiss()
+            }
+            
             guard let result = authResult, error == nil else {
                 print("Log in error")
                 return
