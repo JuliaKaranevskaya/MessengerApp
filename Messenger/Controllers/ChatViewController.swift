@@ -26,6 +26,7 @@ class ChatViewController: MessagesViewController {
     private var messages = [Message]()
     
     private let selfSender = Sender(pictureURL: "", senderId: "1", displayName: "Helga")
+    private let anotherSender = Sender(pictureURL: "", senderId: "2", displayName: "Tom")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,13 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
 
         messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello my friend!")))
-        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: anotherSender, messageId: "2", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: selfSender, messageId: "3", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: anotherSender, messageId: "4", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: selfSender, messageId: "5", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: anotherSender, messageId: "6", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: selfSender, messageId: "7", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
+        messages.append(Message(sender: anotherSender, messageId: "8", sentDate: Date(), kind: .text("Hello my friend! How are you doing? What's new? Where are you now?")))
     }
     
 }
